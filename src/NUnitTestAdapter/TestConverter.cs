@@ -1,9 +1,10 @@
 // ****************************************************************
 // Copyright (c) 2011-2013 NUnit Software. All rights reserved.
 // ****************************************************************
-
+// #define LAUNCHDEBUGGER
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -127,6 +128,9 @@ namespace NUnit.VisualStudio.TestAdapter
         private TestCase MakeTestCaseFromNUnitTest(ITest nunitTest)
         {
             //var testCase = MakeTestCaseFromTestName(nunitTest.TestName);
+#if LAUNCHDEBUGGER
+            Debugger.Launch();
+#endif
             var testCase = new TestCase(
                                      nunitTest.TestName.FullName,
                                      new Uri(NUnitTestExecutor.ExecutorUri),

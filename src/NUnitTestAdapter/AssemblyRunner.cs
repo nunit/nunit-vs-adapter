@@ -57,12 +57,13 @@ namespace NUnit.VisualStudio.TestAdapter
             }
         }
 
-        private static SimpleNameFilter MakeTestFilter(IEnumerable<TestCase> ptestCases)
+        private SimpleNameFilter MakeTestFilter(IEnumerable<TestCase> ptestCases)
         {
             var filter = new SimpleNameFilter();
             foreach (TestCase testCase in ptestCases)
             {
                 filter.Add(testCase.FullyQualifiedName);
+                logger.SendDebugMessage("FQN:"+ testCase.FullyQualifiedName);
             }
             return filter;
         }
