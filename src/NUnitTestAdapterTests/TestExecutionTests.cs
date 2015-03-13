@@ -25,7 +25,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
         ResultSummary Summary { get;  set; }    
 
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void LoadMockassembly()
         {
             // Sanity check to be sure we have the correct version of mock-assembly.dll

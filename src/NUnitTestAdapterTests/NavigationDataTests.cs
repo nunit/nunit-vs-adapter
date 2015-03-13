@@ -65,7 +65,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
             //   Max line: Last code line if that line is an 
             //             unconditional return statement, otherwise
             //             the closing curly brace.
-            Assert.That(data.FileName, Is.StringEnding("NavigationTestData.cs"));
+            Assert.That(data.FileName, Does.EndWith("NavigationTestData.cs"));
 #if DEBUG
             Assert.That(data.MinLineNumber, Is.EqualTo(minLineDebug));
             Assert.That(data.MaxLineNumber, Is.EqualTo(maxLineDebug));

@@ -15,19 +15,18 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
             Assert.AreEqual(1, result);
         }
 
-        [Test, ExpectedException(typeof(AssertionException))]
+        [Test]
         public async void VoidTestFailure()
         {
             var result = await ReturnOne();
 
-            Assert.AreEqual(2, result);
+            Assert.Throws<AssertionException>(() => Assert.AreEqual(2, result));
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public async void VoidTestExpectedException()
         {
-            await ThrowException();
+            Assert.Throws<InvalidOperationException>(async () => await ThrowException());
         }
 
         [Test]
@@ -38,19 +37,18 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
             Assert.AreEqual(1, result);
         }
 
-        [Test, ExpectedException(typeof(AssertionException))]
+        [Test]
         public async Task TaskTestFailure()
         {
             var result = await ReturnOne();
 
-            Assert.AreEqual(2, result);
+            Assert.Throws<AssertionException>(() => Assert.AreEqual(2, result));
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public async Task TaskTestExpectedException()
         {
-            await ThrowException();
+            Assert.Throws<InvalidOperationException>(async () => await ThrowException());
         }
 
         [TestCase(ExpectedResult = 1 )]
@@ -59,10 +57,17 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
             return await ReturnOne();
         }
 
-        [TestCase(ExpectedResult=TestOutcome.Failed), ExpectedException(typeof(AssertionException))]
+        [TestCase(ExpectedResult=TestOutcome.Failed)]
         public async Task<int> TaskTTestCaseWithResultCheckFailure()
         {
-            return await ReturnOne();
+            int result = 0;
+
+            Assert.Throws<AssertionException>(async () =>
+            {
+                result = await ReturnOne();
+            });
+
+            return result;
         }
 
         private static Task<int> ReturnOne()
