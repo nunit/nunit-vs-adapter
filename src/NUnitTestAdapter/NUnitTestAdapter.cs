@@ -73,16 +73,18 @@ namespace NUnit.VisualStudio.TestAdapter
 
         #region Protected Helper Methods
 
+        private const string Name = "NUnit VS Adapter";
+
         protected void Info(string method, string function)
         {
-            var msg = string.Format("NUnit {0} {1} is {2}", adapterVersion, method, function);
+            var msg = string.Format("{0} {1} {2} is {3}",Name, adapterVersion, method, function);
             TestLog.SendInformationalMessage(msg);
         }
 
         protected void Debug(string method, string function)
         {
 #if DEBUG
-            var msg = string.Format("NUnit {0} {1} is {2}", adapterVersion, method, function);
+            var msg = string.Format("{0} {1} {2} is {3}", Name, adapterVersion, method, function);
             TestLog.SendDebugMessage(msg);
 #endif
         }
