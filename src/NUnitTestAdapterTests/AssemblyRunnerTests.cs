@@ -48,7 +48,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
             var t1 = new TestCase(fakeTest1.TestName.FullName, ExecutorUri, "test");
             var t2 = new TestCase(fakeTest2.TestName.FullName, ExecutorUri, "test");
             var list = new List<TestCase> {t1, t2};
-            var runner = new AssemblyRunner(new TestLogger(), "test", list);
+            var runner = new AssemblyRunner(new TestLogger(), "test", list,null);
             runner.AddTestCases(fakeTest1);
             runner.AddTestCases(fakeTest2);
             Assert.That(runner.NUnitFilter.IsEmpty, Is.False, "NUnitfilter should not be empty, we have added testcases");
@@ -58,7 +58,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
         [Test]
         public void AddsNonFilteredCorrectly()
         {
-            var runner = new AssemblyRunner(new TestLogger(), "test");
+            var runner = new AssemblyRunner(new TestLogger(), "test",null);
             runner.AddTestCases(fakeTest1);
             runner.AddTestCases(fakeTest2);
             Assert.That(runner.NUnitFilter.IsEmpty, Is.True, "NUnitfilter has been touched");
@@ -69,7 +69,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
         [Test]
         public void VerifyConstruction1()
         {
-            var runner = new AssemblyRunner(new TestLogger(), "test");
+            var runner = new AssemblyRunner(new TestLogger(), "test",null);
             Assert.That(runner.NUnitFilter.IsEmpty, Is.True);
         }
 
@@ -79,7 +79,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
             var t1 = new TestCase(fakeTest1.TestName.FullName, ExecutorUri, "test");
             var t2 = new TestCase(fakeTest2.TestName.FullName, ExecutorUri, "test");
             var list = new List<TestCase> {t1, t2};
-            var runner = new AssemblyRunner(new TestLogger(), "test", list);
+            var runner = new AssemblyRunner(new TestLogger(), "test", list,null);
             Assert.False(runner.NUnitFilter.IsEmpty);
             Assert.That(runner.NUnitFilter, Is.TypeOf<SimpleNameFilter>());
             Assert.True(runner.NUnitFilter.Match(fakeTest1));

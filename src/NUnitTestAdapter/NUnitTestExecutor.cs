@@ -66,7 +66,7 @@ namespace NUnit.VisualStudio.TestAdapter
                     {
                         sourceAssembly = Path.Combine(Environment.CurrentDirectory, sourceAssembly);
                     }
-                    using (currentRunner = new AssemblyRunner(TestLog, sourceAssembly, tfsfilter))
+                    using (currentRunner = new AssemblyRunner(TestLog, sourceAssembly, tfsfilter,this))
                     {
                         currentRunner.RunAssembly(frameworkHandle);
                     }
@@ -113,7 +113,7 @@ namespace NUnit.VisualStudio.TestAdapter
             var assemblyGroups = tests.GroupBy(tc => tc.Source);
             foreach (var assemblyGroup in assemblyGroups)
             {
-                using (currentRunner = new AssemblyRunner(TestLog, assemblyGroup.Key, assemblyGroup))
+                using (currentRunner = new AssemblyRunner(TestLog, assemblyGroup.Key, assemblyGroup,this))
                 {
                     currentRunner.RunAssembly(frameworkHandle);
                 }
