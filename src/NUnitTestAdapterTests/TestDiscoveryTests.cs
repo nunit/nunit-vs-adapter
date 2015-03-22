@@ -29,7 +29,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
 
             // Load the NUnit mock-assembly.dll once for this test, saving
             // the list of test cases sent to the discovery sink
-            nunittestDiscoverer = ((ITestDiscoverer)new NUnitTestDiscoverer());
+            nunittestDiscoverer = new NUnitTestDiscoverer();
             nunittestDiscoverer.DiscoverTests(new[] { MockAssemblyPath}, null, this, this);
         }
 
