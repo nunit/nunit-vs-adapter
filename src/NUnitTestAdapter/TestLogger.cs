@@ -48,6 +48,11 @@ namespace NUnit.VisualStudio.TestAdapter
             SendWarningMessage("Dependent Assembly " + dependentAssembly + " of " + sourceAssembly + " not found. Can be ignored if not a NUnit project.");
         }
 
+        public void UnsupportedFrameworkWarning(string assembly)
+        {
+            SendWarningMessage("Attempt to load assembly with unsupported test framework in  "+assembly);
+        }
+
         public void LoadingAssemblyFailedWarning(string dependentAssembly, string sourceAssembly)
         {
             SendWarningMessage("Assembly " + dependentAssembly + " loaded through " + sourceAssembly + " failed. Assembly is ignored. Correct deployment of dependencies if this is an error.");
