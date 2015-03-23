@@ -98,7 +98,6 @@
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="preview.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <None Include="source.extension.vsixmanifest">
