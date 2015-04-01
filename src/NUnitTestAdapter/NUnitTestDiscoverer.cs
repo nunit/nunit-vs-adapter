@@ -40,8 +40,7 @@ namespace NUnit.VisualStudio.TestAdapter
                 TestLog.SendDebugMessage("Processing " + sourceAssembly);
 
                 TestRunner runner = new TestDomain();
-                TestPackage package = new TestPackage(sourceAssembly);
-                package.Settings["ShadowCopyFiles"] = ShadowCopy;
+                var package = CreateTestPackage(sourceAssembly);
                 TestConverter testConverter = null;
                 try
                 {
@@ -71,6 +70,10 @@ namespace NUnit.VisualStudio.TestAdapter
                 {
                     // Attempts to load an invalid assembly, or an assembly with missing dependencies
                     TestLog.LoadingAssemblyFailedWarning(ex.FileName, sourceAssembly);
+                }
+                catch (UnsupportedFrameworkException ex)
+                {
+                    TestLog.UnsupportedFrameworkWarning(sourceAssembly);
                 }
                 catch (Exception ex)
                 {

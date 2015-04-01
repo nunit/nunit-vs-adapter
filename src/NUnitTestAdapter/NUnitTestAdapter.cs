@@ -5,15 +5,21 @@
 using System;
 using System.Reflection;
 using System.Runtime.Remoting.Channels;
+using NUnit.Core;
 using NUnit.Util;
 
 namespace NUnit.VisualStudio.TestAdapter
 {
+    public interface INUnitTestAdapter
+    {
+        TestPackage CreateTestPackage(string sourceAssembly);
+    }
+
     /// <summary>
     /// NUnitTestAdapter is the common base for the
     /// NUnit discoverer and executor classes.
     /// </summary>
-    public abstract class NUnitTestAdapter
+    public abstract class NUnitTestAdapter : INUnitTestAdapter
     {
         // Our logger used to display messages
         protected TestLogger TestLog;
@@ -21,9 +27,9 @@ namespace NUnit.VisualStudio.TestAdapter
         private readonly string adapterVersion;
 
         protected bool UseVsKeepEngineRunning { get; private set; }
-        protected bool ShadowCopy { get; private set; }
+        public bool ShadowCopy { get; private set; }
 
-        protected int Verbosity { get; private set; }
+        public int Verbosity { get; private set; }
 
 
         protected bool RegistryFailure { get; set; }
@@ -67,16 +73,18 @@ namespace NUnit.VisualStudio.TestAdapter
 
         #region Protected Helper Methods
 
+        private const string Name = "NUnit VS Adapter";
+
         protected void Info(string method, string function)
         {
-            var msg = string.Format("NUnit {0} {1} is {2}", adapterVersion, method, function);
+            var msg = string.Format("{0} {1} {2} is {3}",Name, adapterVersion, method, function);
             TestLog.SendInformationalMessage(msg);
         }
 
         protected void Debug(string method, string function)
         {
 #if DEBUG
-            var msg = string.Format("NUnit {0} {1} is {2}", adapterVersion, method, function);
+            var msg = string.Format("{0} {1} {2} is {3}", Name, adapterVersion, method, function);
             TestLog.SendDebugMessage(msg);
 #endif
         }
@@ -87,6 +95,16 @@ namespace NUnit.VisualStudio.TestAdapter
                 ChannelServices.UnregisterChannel(chan);
         }
 
+        public TestPackage CreateTestPackage(string sourceAssembly)
+        {
+             var package = new TestPackage(sourceAssembly);
+             package.Settings["ShadowCopyFiles"] = ShadowCopy;
+             TestLog.SendDebugMessage("ShadowCopyFiles is set to :" + package.Settings["ShadowCopyFiles"]);
+             return package;
+        }
+
         #endregion
     }
+
+    
 }

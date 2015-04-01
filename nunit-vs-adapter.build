@@ -7,7 +7,7 @@
 
 
     <!-- Set version number for package -->
-    <property name="package.version" value="1.2"/>
+    <property name="package.version" value="2.0.0"/>
 
     <!-- Define package name, including version -->
     <property name="package.base.name" value="NUnitVisualStudioTestAdapter"/>
@@ -33,78 +33,78 @@
     <target name="test" description="Test the adapter (NYI)"/>
 
     <target name="package" desciption="Package the adapter"
-		depends="package-vsix,package-zip,package-nuget-1,package-nuget-2"/>
+    depends="package-vsix,package-zip,package-nuget-1,package-nuget-2"/>
 
-	<target name="package-vsix">
-		
-		<!-- Copy the vsix package, built by Visual Studio. -->
-		<property name="source.vsix.file" value="NUnitTestAdapter.vsix"/>
-		<property name="target.vsix.file" value="${package.name}.vsix"/>
-		<copy file="${path::combine(install.release.dir, source.vsix.file)}"
-		tofile="${path::combine(project.package.dir, target.vsix.file)}"/>
-		
-	</target>
+  <target name="package-vsix">
+    
+    <!-- Copy the vsix package, built by Visual Studio. -->
+    <property name="source.vsix.file" value="NUnitTestAdapter.vsix"/>
+    <property name="target.vsix.file" value="${package.name}.vsix"/>
+    <copy file="${path::combine(install.release.dir, source.vsix.file)}"
+    tofile="${path::combine(project.package.dir, target.vsix.file)}"/>
+    
+  </target>
 
-	<target name="package-zip">
+  <target name="package-zip">
 
-		<!-- Create the working directory -->
-		<mkdir dir="${package.working.dir}"/>
+    <!-- Create the working directory -->
+    <mkdir dir="${package.working.dir}"/>
 
-		<!-- Copy binaries to the working directory for zipping. -->
-		<copy todir="${package.working.dir}">
-			<fileset basedir="${install.release.dir}">
-				<include name="NUnit.VisualStudio.TestAdapter.dll"/>
-				<include name="nunit.util.dll"/>
-				<include name="nunit.core.dll"/>
-				<include name="nunit.core.interfaces.dll"/>
-			</fileset>
-		</copy>
+    <!-- Copy binaries to the working directory for zipping. -->
+    <copy todir="${package.working.dir}">
+      <fileset basedir="${install.release.dir}">
+        <include name="NUnit.VisualStudio.TestAdapter.dll"/>
+        <include name="nunit.util.dll"/>
+        <include name="nunit.core.dll"/>
+        <include name="nunit.core.interfaces.dll"/>
+      </fileset>
+    </copy>
 
-		<!-- Create the zip package -->
-		<property name="zip.file.name" value="${package.name}.zip"/>
-		<zip ziplevel="9"
-			zipfile="${project.package.dir}/${zip.file.name}">
-			<fileset basedir="${package.working.dir}" prefix="${package.name}">
-				<include name="**"/>
-			</fileset>
-		</zip>
+    <!-- Create the zip package -->
+    <property name="zip.file.name" value="${package.name}.zip"/>
+    <zip ziplevel="9"
+      zipfile="${project.package.dir}/${zip.file.name}">
+      <fileset basedir="${package.working.dir}" prefix="${package.name}">
+        <include name="**"/>
+      </fileset>
+    </zip>
 
-	</target>
+  </target>
 
-	<target name="package-nuget-1">
+  <target name="package-nuget-1">
 
-		<property name="nuget.package.name" value="NUnitVisualStudioTestAdapter"/>
-		<property name="nuget.internal.id" value="NUnitTestAdapter"/>
-		<call target="create-nuget-package"/>
+    <property name="nuget.package.name" value="NUnitVisualStudioTestAdapter"/>
+    <property name="nuget.internal.id" value="NUnitTestAdapter"/>
+    <call target="create-nuget-package"/>
 
-	</target>
+  </target>
 
-	<target name="package-nuget-2">
+  <target name="package-nuget-2">
 
-		<property name="nuget.package.name" value="NUnitVisualStudioTestAdapterAndFramework"/>
-		<property name="nuget.internal.id" value="NUnitTestAdapter.WithFramework"/>
-		<call target="create-nuget-package"/>
+    <property name="nuget.package.name" value="NUnitVisualStudioTestAdapterAndFramework"/>
+    <property name="nuget.internal.id" value="NUnitTestAdapter.WithFramework"/>
+    <call target="create-nuget-package"/>
 
-	</target>
+  </target>
 
-	<target name="create-nuget-package">
-		
-		<copy file="${project.nuget.dir}/${nuget.package.name}.nuspec"
-			tofile="${project.package.dir}/${nuget.package.name}-${package.version}.nuspec"
-			overwrite="true">
-			<filterchain>
-				<expandproperties/>
-			</filterchain>
-		</copy>
+  <target name="create-nuget-package">
+    
+    <copy file="${project.nuget.dir}/${nuget.package.name}.nuspec"
+      tofile="${project.package.dir}/${nuget.package.name}-${package.version}.nuspec"
+      overwrite="true">
+      <filterchain>
+        <expandproperties/>
+      </filterchain>
+    </copy>
 
-		<exec program="NuGet.exe"
-			workingdir="${project.package.dir}"
-			commandline="pack ${nuget.package.name}-${package.version}.nuspec" />
+    <exec program="NuGet.exe"
+      workingdir="${project.package.dir}"
+      commandline="pack ${nuget.package.name}-${package.version}.nuspec" />
 
-		<move file="${project.package.dir}/${nuget.internal.id}.${package.version}.nupkg"
-		    tofile="${project.package.dir}/${nuget.package.name}-${package.version}.nupkg"/>
+    <move file="${project.package.dir}/${nuget.internal.id}.${package.version}.nupkg"
+        tofile="${project.package.dir}/${nuget.package.name}-${package.version}.nupkg"/>
 
-	</target>
-		
+  </target>
+    
 </project>
 
