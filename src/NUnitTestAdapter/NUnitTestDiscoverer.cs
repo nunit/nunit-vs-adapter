@@ -1,8 +1,11 @@
 ﻿// ****************************************************************
 // Copyright (c) 2011 NUnit Software. All rights reserved.
 // ****************************************************************
-
+// #define LAUNCHDEBUGGER
 using System.Collections.Generic;
+#if LAUNCHDEBUGGER
+using System.Diagnostics;
+#endif
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
