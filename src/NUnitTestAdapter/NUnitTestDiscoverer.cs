@@ -74,7 +74,7 @@ namespace NUnit.VisualStudio.TestAdapter
                     // Attempts to load an invalid assembly, or an assembly with missing dependencies
                     TestLog.LoadingAssemblyFailedWarning(ex.FileName, sourceAssembly);
                 }
-                catch (UnsupportedFrameworkException ex)
+                catch (UnsupportedFrameworkException)
                 {
                     TestLog.UnsupportedFrameworkWarning(sourceAssembly);
                 }
