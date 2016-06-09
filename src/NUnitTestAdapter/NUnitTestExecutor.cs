@@ -15,7 +15,7 @@ namespace NUnit.VisualStudio.TestAdapter
 {
 
     [ExtensionUri(ExecutorUri)]
-    public sealed class NUnitTestExecutor : NUnitTestAdapter, ITestExecutor, IDisposable
+    public sealed class NUnitTestExecutor : NUnitTestAdapter, ITestExecutor
     {
         ///<summary>
         /// The Uri used to identify the NUnitExecutor
@@ -61,17 +61,18 @@ namespace NUnit.VisualStudio.TestAdapter
                 foreach (var source in sources)
                 {
                     string sourceAssembly = source;
-
                     if (!Path.IsPathRooted(sourceAssembly))
-                    {
                         sourceAssembly = Path.Combine(Environment.CurrentDirectory, sourceAssembly);
-                    }
-                    using (currentRunner = new AssemblyRunner(TestLog, sourceAssembly, tfsfilter,this))
+
+                    try // TODO: Do we need try?
                     {
+                        currentRunner = new AssemblyRunner(TestLog, sourceAssembly, tfsfilter, this);
                         currentRunner.RunAssembly(frameworkHandle);
                     }
-
-                    currentRunner = null;
+                    finally
+                    {
+                        currentRunner = null;
+                    }
                 }
             }
             catch (Exception ex)
@@ -113,12 +114,15 @@ namespace NUnit.VisualStudio.TestAdapter
             var assemblyGroups = tests.GroupBy(tc => tc.Source);
             foreach (var assemblyGroup in assemblyGroups)
             {
-                using (currentRunner = new AssemblyRunner(TestLog, assemblyGroup.Key, assemblyGroup,this))
+                try // TODO: Do we need try?
                 {
+                    currentRunner = new AssemblyRunner(TestLog, assemblyGroup.Key, assemblyGroup, this);
                     currentRunner.RunAssembly(frameworkHandle);
                 }
-
-                currentRunner = null;
+                finally
+                {
+                    currentRunner = null;
+                }
             }
 
             Info("executing tests", "finished");
@@ -132,22 +136,5 @@ namespace NUnit.VisualStudio.TestAdapter
         }
 
         #endregion
-
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (currentRunner != null)
-                {
-                    currentRunner.Dispose();
-                }
-            }
-            currentRunner = null;
-        }
     }
 }

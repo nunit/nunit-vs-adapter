@@ -53,12 +53,6 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
             testConverter = new TestConverter(new TestLogger(), ThisAssemblyPath);
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            testConverter.Dispose();
-        }
-
         [Test]
         public void CanMakeTestCaseFromTest()
         {

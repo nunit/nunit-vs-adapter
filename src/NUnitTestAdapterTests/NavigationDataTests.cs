@@ -18,12 +18,6 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
             testConverter = new TestConverter(new TestLogger(), ThisAssemblyPath);
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            testConverter.Dispose();
-        }
-
         [TestCase("", "EmptyMethod_OneLine", 9, 9, 9, 9)]
         [TestCase("", "EmptyMethod_TwoLines", 12, 13, 13, 13)]
         [TestCase("", "EmptyMethod_ThreeLines", 16, 17, 17, 17)]

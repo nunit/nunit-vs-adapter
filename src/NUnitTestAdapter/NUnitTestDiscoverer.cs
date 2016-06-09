@@ -85,8 +85,6 @@ namespace NUnit.VisualStudio.TestAdapter
                 }
                 finally
                 {
-                    if (testConverter != null)
-                        testConverter.Dispose();
                     runner.Unload();
                 }
             }
