@@ -17,17 +17,19 @@ namespace NUnit.VisualStudio.TestAdapter
 {
     public class TestConverter
     {
-        private readonly TestLogger logger;
-        private readonly Dictionary<string, TestCase> vsTestCaseMap;
-        private readonly string sourceAssembly;
+        private readonly TestLogger _logger;
+        private readonly Dictionary<string, TestCase> _vsTestCaseMap;
+        private readonly string _sourceAssembly;
+        private NavigationDataProvider _navigationDataProvider;
 
-        #region Constructors
+        #region Constructor
 
         public TestConverter(TestLogger logger, string sourceAssembly)
         {
-            this.logger = logger;
-            this.sourceAssembly = sourceAssembly;
-            this.vsTestCaseMap = new Dictionary<string, TestCase>();
+            _logger = logger;
+            _sourceAssembly = sourceAssembly;
+            _vsTestCaseMap = new Dictionary<string, TestCase>();
+            _navigationDataProvider = new NavigationDataProvider(sourceAssembly);
         }
 
         #endregion
@@ -45,21 +47,21 @@ namespace NUnit.VisualStudio.TestAdapter
                 throw new ArgumentException("The argument must be a test case", "test");
 
             // Return cached value if we have one
-            if (vsTestCaseMap.ContainsKey(test.TestName.UniqueName))
-                return vsTestCaseMap[test.TestName.UniqueName];
+            if (_vsTestCaseMap.ContainsKey(test.TestName.UniqueName))
+                return _vsTestCaseMap[test.TestName.UniqueName];
            
             // Convert to VS TestCase and cache the result
             var testCase = MakeTestCaseFromNUnitTest(test);
-            vsTestCaseMap.Add(test.TestName.UniqueName, testCase);
+            _vsTestCaseMap.Add(test.TestName.UniqueName, testCase);
             return testCase;             
         }
 
         public TestCase GetCachedTestCase(string key)
         {
-            if (vsTestCaseMap.ContainsKey(key))
-                return vsTestCaseMap[key];
+            if (_vsTestCaseMap.ContainsKey(key))
+                return _vsTestCaseMap[key];
 
-            logger.SendErrorMessage("Test " + key + " not found in cache");
+            _logger.SendErrorMessage("Test " + key + " not found in cache");
             return null;
         }
 
@@ -112,38 +114,23 @@ namespace NUnit.VisualStudio.TestAdapter
             var testCase = new TestCase(
                                      nunitTest.TestName.FullName,
                                      new Uri(NUnitTestExecutor.ExecutorUri),
-                                     this.sourceAssembly)
+                                     this._sourceAssembly)
             {
                 DisplayName = nunitTest.TestName.Name,
                 CodeFilePath = null,
                 LineNumber = 0
             };
 
-            var navData = GetNavigationData(nunitTest.ClassName, nunitTest.MethodName);
-            if (navData != null)
+            var navData = _navigationDataProvider.GetNavigationData(nunitTest.ClassName, nunitTest.MethodName);
+            if (navData.IsValid)
             {
-                testCase.CodeFilePath = navData.FileName;
-                testCase.LineNumber = navData.MinLineNumber;
+                testCase.CodeFilePath = navData.FilePath;
+                testCase.LineNumber = navData.LineNumber;
             }
 
             testCase.AddTraitsFromNUnitTest(nunitTest);
 
             return testCase;
-        }
-
-        // public for testing
-        public DiaNavigationData GetNavigationData(string className, string methodName)
-        {
-            return null;
-
-            //var navData = DiaSession.GetNavigationData(className, methodName);
-
-            //if (navData != null && navData.FileName != null) return navData;
-
-            //if (navData == null || navData.FileName == null)
-            //    logger.SendWarningMessage(string.Format("No source data found for {0}.{1}", className, methodName));
-
-            //return navData;
         }
 
         // Public for testing
