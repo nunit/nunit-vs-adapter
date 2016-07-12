@@ -22,22 +22,23 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
         [TestCase("", "EmptyMethod_TwoLines", 12, 13)]
         [TestCase("", "EmptyMethod_ThreeLines", 16, 17)]
         [TestCase("", "EmptyMethod_LotsOfLines", 20, 23)]
-        [TestCase("", "SimpleMethod_Void_NoArgs", 26, 27)]
+        [TestCase("", "SimpleMethod_Void_NoArgs", 26, 28)]
         [TestCase("", "SimpleMethod_Void_OneArg", 32, 33)]
         [TestCase("", "SimpleMethod_Void_TwoArgs", 38, 39)]
-        [TestCase("", "SimpleMethod_ReturnsInt_NoArgs", 44, 45)]
+        [TestCase("", "SimpleMethod_ReturnsInt_NoArgs", 44, 46)]
         [TestCase("", "SimpleMethod_ReturnsString_OneArg", 50, 51)]
         // Generic method uses simple name
         [TestCase("", "GenericMethod_ReturnsString_OneArg", 55, 56)]
-        [TestCase("", "AsyncMethod_Void", 60, 61)]
-        [TestCase("", "AsyncMethod_Task", 67, 68)]
-        [TestCase("", "AsyncMethod_ReturnsInt", 74, 75)]
-        [TestCase("+NestedClass", "SimpleMethod_Void_NoArgs", 83, 84)]
-        [TestCase("+ParameterizedFixture", "SimpleMethod_ReturnsString_OneArg", 101, 102)]
+        [TestCase("", "AsyncMethod_Void", 60, 62)]
+        [TestCase("", "AsyncMethod_Task", 67, 69)]
+        [TestCase("", "AsyncMethod_ReturnsInt", 74, 76)]
+        [TestCase("/NestedClass", "SimpleMethod_Void_NoArgs", 83, 85)]
+        [TestCase("/ParameterizedFixture", "SimpleMethod_ReturnsString_OneArg", 101, 102)]
         // Generic Fixture requires ` plus type arg count
-        [TestCase("+GenericFixture`2", "Matches", 116, 117)]
-        [TestCase("+GenericFixture`2+DoublyNested", "WriteBoth", 132, 133)]
-        [TestCase("+GenericFixture`2+DoublyNested`1", "WriteAllThree", 151, 152)]
+        [TestCase("/GenericFixture`2", "Matches", 116, 117)]
+        [TestCase("/GenericFixture`2/DoublyNested", "WriteBoth", 132, 133)]
+        [TestCase("/GenericFixture`2/DoublyNested`1", "WriteAllThree", 151, 152)]
+        [TestCase("/DerivedClass", "EmptyMethod_ThreeLines", 160, 161)]
         public void VerifyNavigationData(string suffix, string methodName, int expectedLineDebug, int expectedLineRelease)
         {
             // Get the navigation data - ensure names are spelled correctly!

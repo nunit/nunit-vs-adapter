@@ -24,8 +24,8 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
         
         public void SimpleMethod_Void_NoArgs()
         {// expectedLineDebug = 26
-            const int answer = 42; // expectedLineRelease = 27
-            Console.Write(answer);
+            const int answer = 42;
+            Console.Write(answer); // expectedLineRelease = 28
         }
 
         public void SimpleMethod_Void_OneArg(int x)
@@ -42,8 +42,8 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
 
         public int SimpleMethod_ReturnsInt_NoArgs()
         {// expectedLineDebug = 44
-            const int answer = 42; // expectedLineRelease = 45
-            return answer;
+            const int answer = 42;
+            return answer; // expectedLineRelease = 46
         }
 
         public string SimpleMethod_ReturnsString_OneArg(int x)
@@ -58,22 +58,22 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
 
         public async void AsyncMethod_Void()
         { // expectedLineDebug = 60
-            const int answer = 42; // expectedLineRelease = 61
-            await Task.Delay(0);
+            const int answer = 42;
+            await Task.Delay(0); // expectedLineRelease = 62
             Console.Write(answer);
         }
 
         public async Task AsyncMethod_Task()
         { // expectedLineDebug = 67
-            const int answer = 42; // expectedLineRelease = 68
-            await Task.Delay(0);
+            const int answer = 42;
+            await Task.Delay(0);  // expectedLineRelease = 69
             Console.Write(answer);
         }
 
         public async Task<int> AsyncMethod_ReturnsInt()
         { // expectedLineDebug = 74
-            const int answer = 42; // expectedLineRelease = 75
-            await Task.Delay(0);
+            const int answer = 42;
+            await Task.Delay(0); // expectedLineRelease = 76
             return answer;
         }
 
@@ -81,8 +81,8 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
         {
             public void SimpleMethod_Void_NoArgs()
             {// expectedLineDebug = 83
-                const int answer = 42; // expectedLineRelease = 84
-                Console.Write(answer);
+                const int answer = 42;
+                Console.Write(answer); // expectedLineRelease = 85
             }
         }
 
@@ -152,6 +152,17 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
                     Console.Write(X + Y.ToString() + Z); // expectedLineRelease = 152
                 }
             }
+        }
+
+        public abstract class BaseClass
+        {
+            public void EmptyMethod_ThreeLines()
+            { // expectedLineDebug = 160
+            } // expectedLineRelease = 161
+        }
+
+        public class DerivedClass : BaseClass
+        {
         }
     }
 }
