@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>NUnitTestAdapter</id>
-        <version>${package.version}</version>
+        <version>$version$</version>
         <title>NUnit Test Adapter for VS2012 and VS2013</title>
         <authors>NUnit Software</authors>
         <owners>NUnit Software</owners>
@@ -20,15 +20,15 @@ The package works with Visual Studio 2012 from RTM, and all Updates, and with Vi
         <tags>test visualstudio testadapter</tags>
     </metadata>
     <files>
-        <file src="../LICENSE.txt" />
-        <file src="${package.working.dir}\nunit.core.dll" target="lib\nunit.core.dll" />
-        <file src="${package.working.dir}\nunit.core.interfaces.dll" target="lib\nunit.core.interfaces.dll" />
-        <file src="${package.working.dir}\nunit.util.dll" target="lib\nunit.util.dll" />
-        <file src="${package.working.dir}\NUnit.VisualStudio.TestAdapter.dll" target="lib\NUnit.VisualStudio.TestAdapter.dll" />
-        <file src="${package.working.dir}\Mono.Cecil.dll" target="lib\Mono.Cecil.dll" />
-        <file src="${package.working.dir}\Mono.Cecil.Mdb.dll" target="lib\Mono.Cecil.Mdb.dll" />
-        <file src="${package.working.dir}\Mono.Cecil.Pdb.dll" target="lib\Mono.Cecil.Pdb.dll" />
-        <file src="${package.working.dir}\Mono.Cecil.Rocks.dll" target="lib\Mono.Cecil.Rocks.dll" />
-        <file src="..\nuget\install.ps1" target="tools\install.ps1" />
+        <file src="LICENSE.txt" />
+        <file src="bin\nunit.core.dll" target="lib\nunit.core.dll" />
+        <file src="bin\nunit.core.interfaces.dll" target="lib\nunit.core.interfaces.dll" />
+        <file src="bin\nunit.util.dll" target="lib\nunit.util.dll" />
+        <file src="bin\NUnit.VisualStudio.TestAdapter.dll" target="lib\NUnit.VisualStudio.TestAdapter.dll" />
+        <file src="bin\Mono.Cecil.dll" target="lib\Mono.Cecil.dll" />
+        <file src="bin\Mono.Cecil.Mdb.dll" target="lib\Mono.Cecil.Mdb.dll" />
+        <file src="bin\Mono.Cecil.Pdb.dll" target="lib\Mono.Cecil.Pdb.dll" />
+        <file src="bin\Mono.Cecil.Rocks.dll" target="lib\Mono.Cecil.Rocks.dll" />
+        <file src="..\..\nuget\install.ps1" target="tools\install.ps1" />
     </files>
 </package>

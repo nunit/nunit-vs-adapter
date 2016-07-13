@@ -22,7 +22,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
         private static readonly string ThisAssemblyPath = 
             Path.GetFullPath("NUnit.VisualStudio.TestAdapter.Tests.dll");
         private static readonly string ThisCodeFile = 
-            Path.GetFullPath(@"..\..\TestConverterTests.cs");
+            Path.GetFullPath(@"..\..\src\NUnitTestAdapterTests\TestConverterTests.cs");
         
         // NOTE: If the location of the FakeTestCase method in the 
         // file changes, update the value of FAKE_LINE_NUMBER.
