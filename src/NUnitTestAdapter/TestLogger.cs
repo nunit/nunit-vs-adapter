@@ -58,7 +58,7 @@ namespace NUnit.VisualStudio.TestAdapter
             SendWarningMessage("Assembly " + dependentAssembly + " loaded through " + sourceAssembly + " failed. Assembly is ignored. Correct deployment of dependencies if this is an error.");
         }
 
-        public void NUnitLoadError(string sourceAssembly)
+        public void NoNUnit2TestsFoundIn(string sourceAssembly)
         {
             SendInformationalMessage("No NUnit 2 tests found in " + sourceAssembly);
         }
