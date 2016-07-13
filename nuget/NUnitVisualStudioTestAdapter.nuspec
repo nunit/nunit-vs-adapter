@@ -20,10 +20,15 @@ The package works with Visual Studio 2012 from RTM, and all Updates, and with Vi
         <tags>test visualstudio testadapter</tags>
     </metadata>
     <files>
-        <file src="${project.lib.dir}\nunit.core.dll" target="lib\nunit.core.dll" />
-        <file src="${project.lib.dir}\nunit.core.interfaces.dll" target="lib\nunit.core.interfaces.dll" />
-        <file src="${project.lib.dir}\nunit.util.dll" target="lib\nunit.util.dll" />
+        <file src="../LICENSE.txt" />
+        <file src="${package.working.dir}\nunit.core.dll" target="lib\nunit.core.dll" />
+        <file src="${package.working.dir}\nunit.core.interfaces.dll" target="lib\nunit.core.interfaces.dll" />
+        <file src="${package.working.dir}\nunit.util.dll" target="lib\nunit.util.dll" />
         <file src="${package.working.dir}\NUnit.VisualStudio.TestAdapter.dll" target="lib\NUnit.VisualStudio.TestAdapter.dll" />
-        <file src="${project.nuget.dir}\install.ps1" target="tools\install.ps1" />
+        <file src="${package.working.dir}\Mono.Cecil.dll" target="lib\Mono.Cecil.dll" />
+        <file src="${package.working.dir}\Mono.Cecil.Mdb.dll" target="lib\Mono.Cecil.Mdb.dll" />
+        <file src="${package.working.dir}\Mono.Cecil.Pdb.dll" target="lib\Mono.Cecil.Pdb.dll" />
+        <file src="${package.working.dir}\Mono.Cecil.Rocks.dll" target="lib\Mono.Cecil.Rocks.dll" />
+        <file src="..\nuget\install.ps1" target="tools\install.ps1" />
     </files>
 </package>

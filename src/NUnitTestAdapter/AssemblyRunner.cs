@@ -21,7 +21,7 @@ namespace NUnit.VisualStudio.TestAdapter
     /// <summary>
     /// The AssemblyRunner class executes tests in a single assembly
     /// </summary>
-    public class AssemblyRunner : IDisposable
+    public class AssemblyRunner
     {
         private readonly TestRunner runner = new TestDomain();
         private readonly TestLogger logger;
@@ -186,34 +186,6 @@ namespace NUnit.VisualStudio.TestAdapter
                 LoadedTestCases.Add(TestConverter.ConvertTestCase(test));
         }
 
-        #endregion
-
-        #region IDisposable
-        private bool disposed;
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    if (TestConverter != null)
-                        TestConverter.Dispose();
-                }
-            }
-            disposed = true;
-        }
-
-        ~AssemblyRunner()
-        {
-            Dispose(false);
-        }
         #endregion
     }
 }
