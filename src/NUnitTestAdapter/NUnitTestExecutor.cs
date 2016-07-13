@@ -64,15 +64,8 @@ namespace NUnit.VisualStudio.TestAdapter
                     if (!Path.IsPathRooted(sourceAssembly))
                         sourceAssembly = Path.Combine(Environment.CurrentDirectory, sourceAssembly);
 
-                    try // TODO: Do we need try?
-                    {
-                        currentRunner = new AssemblyRunner(TestLog, sourceAssembly, tfsfilter, this);
-                        currentRunner.RunAssembly(frameworkHandle);
-                    }
-                    finally
-                    {
-                        currentRunner = null;
-                    }
+                    currentRunner = new AssemblyRunner(TestLog, sourceAssembly, tfsfilter, this);
+                    currentRunner.RunAssembly(frameworkHandle);
                 }
             }
             catch (Exception ex)
@@ -114,15 +107,8 @@ namespace NUnit.VisualStudio.TestAdapter
             var assemblyGroups = tests.GroupBy(tc => tc.Source);
             foreach (var assemblyGroup in assemblyGroups)
             {
-                try // TODO: Do we need try?
-                {
-                    currentRunner = new AssemblyRunner(TestLog, assemblyGroup.Key, assemblyGroup, this);
-                    currentRunner.RunAssembly(frameworkHandle);
-                }
-                finally
-                {
-                    currentRunner = null;
-                }
+                currentRunner = new AssemblyRunner(TestLog, assemblyGroup.Key, assemblyGroup, this);
+                currentRunner.RunAssembly(frameworkHandle);
             }
 
             Info("executing tests", "finished");
