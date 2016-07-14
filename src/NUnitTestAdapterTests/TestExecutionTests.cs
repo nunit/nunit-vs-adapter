@@ -16,7 +16,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
     [Category("TestExecution")]
     public class TestExecutionTests
     {
-        static readonly string MockAssemblyPath = Path.GetFullPath("mock-assembly.dll");
+        private string MockAssemblyPath;
         static readonly IRunContext Context = new FakeRunContext();
 
         private List<TestResult> testResults;
@@ -28,6 +28,8 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
         [TestFixtureSetUp]
         public void LoadMockassembly()
         {
+            MockAssemblyPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "mock-assembly.dll");
+
             // Sanity check to be sure we have the correct version of mock-assembly.dll
             Assert.That(MockAssembly.Tests, Is.EqualTo(31),
                 "The reference to mock-assembly.dll appears to be the wrong version");
@@ -91,7 +93,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
 
         [TestCase("MockTest3", TestOutcome.Passed, "Succeeded!", true)]
         [TestCase("FailingTest", TestOutcome.Failed, "Intentional failure", true)]
-        [TestCase("TestWithException", TestOutcome.Failed, "System.ApplicationException : Intentional Exception", true)]
+        [TestCase("TestWithException", TestOutcome.Failed, "System.Exception : Intentional Exception", true)]
         // NOTE: Should Inconclusive be reported as TestOutcome.None?
         [TestCase("InconclusiveTest", TestOutcome.None, "No valid data", false)]
         [TestCase("MockTest4", TestOutcome.Skipped, "ignoring this test method for now", false)]

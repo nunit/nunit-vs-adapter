@@ -33,7 +33,7 @@
     <target name="test" description="Test the adapter (NYI)"/>
 
     <target name="package" desciption="Package the adapter"
-    depends="package-vsix,package-zip,package-nuget-1,package-nuget-2"/>
+    depends="package-vsix,package-zip,package-nuget"/>
 
   <target name="package-vsix">
     
@@ -57,6 +57,10 @@
         <include name="nunit.util.dll"/>
         <include name="nunit.core.dll"/>
         <include name="nunit.core.interfaces.dll"/>
+        <include name="Mono.Cecil.dll"/>
+        <include name="Mono.Cecil.Mdb.dll"/>
+        <include name="Mono.Cecil.Pdb.dll"/>
+        <include name="Mono.Cecil.Rocks.dll"/>
       </fileset>
     </copy>
 
@@ -71,18 +75,10 @@
 
   </target>
 
-  <target name="package-nuget-1">
+  <target name="package-nuget">
 
     <property name="nuget.package.name" value="NUnitVisualStudioTestAdapter"/>
     <property name="nuget.internal.id" value="NUnitTestAdapter"/>
-    <call target="create-nuget-package"/>
-
-  </target>
-
-  <target name="package-nuget-2">
-
-    <property name="nuget.package.name" value="NUnitVisualStudioTestAdapterAndFramework"/>
-    <property name="nuget.internal.id" value="NUnitTestAdapter.WithFramework"/>
     <call target="create-nuget-package"/>
 
   </target>
@@ -97,7 +93,7 @@
       </filterchain>
     </copy>
 
-    <exec program="NuGet.exe"
+    <exec program="tools/NuGet.exe"
       workingdir="${project.package.dir}"
       commandline="pack ${nuget.package.name}-${package.version}.nuspec" />
 

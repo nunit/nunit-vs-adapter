@@ -50,9 +50,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.ObjectModel">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(MSBuildProgramFiles32)\Microsoft Visual Studio 11.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\packages\Microsoft.VisualStudio.TestPlatform.ObjectModel.0.0.3\lib\net35\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\..\packages\Mono.Cecil.0.9.6.1\lib\net35\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb">
+      <HintPath>..\..\packages\Mono.Cecil.0.9.6.1\lib\net35\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb">
+      <HintPath>..\..\packages\Mono.Cecil.0.9.6.1\lib\net35\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks">
+      <HintPath>..\..\packages\Mono.Cecil.0.9.6.1\lib\net35\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="nunit.core">
       <SpecificVersion>False</SpecificVersion>
@@ -72,10 +82,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyRunner.cs" />
-    <Compile Include="Internal\AsyncMethodHelper.cs" />
     <Compile Include="Internal\Stackframe.cs" />
     <Compile Include="Internal\StackframeParser.cs" />
     <Compile Include="Internal\Stacktrace.cs" />
+    <Compile Include="NavigationData.cs" />
+    <Compile Include="NavigationDataProvider.cs" />
     <Compile Include="NUnitEventListener.cs" />
     <Compile Include="NUnitTestAdapter.cs" />
     <Compile Include="NUnitTestDiscoverer.cs" />
@@ -96,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="NUnitAdapter.snk" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
