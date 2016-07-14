@@ -18,6 +18,13 @@ build/
 # Ignore output folder named package
 package/
 
+# Ignore tools directory except for packages.config
+tools/
+!tools/packages.config
+
+# Ignore NUnit TestResult
+TestResult.xml
+
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
 # Disable NuGet packages folder

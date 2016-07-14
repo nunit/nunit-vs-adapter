@@ -64,6 +64,12 @@ namespace NUnitTestDemo
             Assert.Ignore("Ignoring this test case");
         }
 
+        [Explicit]
+        [TestCase(31, 11)]
+        public void TestCaseIsExplicit(int a, int b)
+        {
+        }
+
         [TestCase(31, 11)]
         public void TestCaseThrowsException(int a, int b)
         {
