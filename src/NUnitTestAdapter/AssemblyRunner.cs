@@ -125,7 +125,7 @@ namespace NUnit.VisualStudio.TestAdapter
                 }
                 else
                 {
-                    logger.NUnitLoadError(assemblyName);
+                    logger.NoNUnit2TestsFoundIn(assemblyName);
                 }
             }
             catch (BadImageFormatException)
@@ -137,6 +137,11 @@ namespace NUnit.VisualStudio.TestAdapter
             {
                 // Probably from the GetExportedTypes in NUnit.core, attempting to find an assembly, not a problem if it is not NUnit here
                 logger.DependentAssemblyNotFoundWarning(ex.FileName, assemblyName);
+            }
+            catch (UnsupportedFrameworkException ex)
+            {
+                //The UnsupportedFrameworkException is thrown by nunit, if the assembly references the NUnit v3 framework.
+                logger.SendInformationalMessage("Attempt to load assembly with unsupported test framework in " +  assemblyName);
             }
             catch (Exception ex)
             {
