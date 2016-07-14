@@ -125,7 +125,7 @@ namespace NUnit.VisualStudio.TestAdapter
                 }
                 else
                 {
-                    logger.NUnitLoadError(assemblyName);
+                    logger.NoNUnit2TestsFoundIn(assemblyName);
                 }
             }
             catch (BadImageFormatException)

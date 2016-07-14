@@ -50,7 +50,7 @@ namespace NUnit.VisualStudio.TestAdapter
 
         public void UnsupportedFrameworkWarning(string assembly)
         {
-            SendWarningMessage("Attempt to load assembly with unsupported test framework in  "+assembly);
+            SendInformationalMessage("Assembly contains no NUnit 2 tests:  " + assembly);
         }
 
         public void LoadingAssemblyFailedWarning(string dependentAssembly, string sourceAssembly)
@@ -58,9 +58,9 @@ namespace NUnit.VisualStudio.TestAdapter
             SendWarningMessage("Assembly " + dependentAssembly + " loaded through " + sourceAssembly + " failed. Assembly is ignored. Correct deployment of dependencies if this is an error.");
         }
 
-        public void NUnitLoadError(string sourceAssembly)
+        public void NoNUnit2TestsFoundIn(string sourceAssembly)
         {
-            SendErrorMessage("NUnit failed to load " + sourceAssembly);
+            SendInformationalMessage("No NUnit 2 tests found in " + sourceAssembly);
         }
 
         public void SendErrorMessage(string message)
