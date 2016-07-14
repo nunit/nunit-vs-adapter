@@ -56,6 +56,11 @@ namespace NUnitTestDemo
             Assert.Ignore("Ignoring this test deliberately");
         }
 
+        [Test, Explicit]
+        public void TestIsExplicit()
+        {
+        }
+
         [Test]
         public void TestThrowsException()
         {
