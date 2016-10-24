@@ -21,14 +21,13 @@ The package works with Visual Studio >= 2012</description>
     </metadata>
     <files>
         <file src="LICENSE.txt" />
-        <file src="bin\nunit.core.dll" target="lib\nunit.core.dll" />
-        <file src="bin\nunit.core.interfaces.dll" target="lib\nunit.core.interfaces.dll" />
-        <file src="bin\nunit.util.dll" target="lib\nunit.util.dll" />
-        <file src="bin\NUnit.VisualStudio.TestAdapter.dll" target="lib\NUnit.VisualStudio.TestAdapter.dll" />
-        <file src="bin\Mono.Cecil.dll" target="lib\Mono.Cecil.dll" />
-        <file src="bin\Mono.Cecil.Mdb.dll" target="lib\Mono.Cecil.Mdb.dll" />
-        <file src="bin\Mono.Cecil.Pdb.dll" target="lib\Mono.Cecil.Pdb.dll" />
-        <file src="bin\Mono.Cecil.Rocks.dll" target="lib\Mono.Cecil.Rocks.dll" />
-        <file src="..\..\nuget\install.ps1" target="tools\install.ps1" />
+        <file src="bin\nunit.core.dll" target="tools\nunit.core.dll" />
+        <file src="bin\nunit.core.interfaces.dll" target="tools\nunit.core.interfaces.dll" />
+        <file src="bin\nunit.util.dll" target="tools\nunit.util.dll" />
+        <file src="bin\NUnit.VisualStudio.TestAdapter.dll" target="tools\NUnit.VisualStudio.TestAdapter.dll" />
+        <file src="bin\Mono.Cecil.dll" target="tools\Mono.Cecil.dll" />
+        <file src="bin\Mono.Cecil.Mdb.dll" target="tools\Mono.Cecil.Mdb.dll" />
+        <file src="bin\Mono.Cecil.Pdb.dll" target="tools\Mono.Cecil.Pdb.dll" />
+        <file src="bin\Mono.Cecil.Rocks.dll" target="tools\Mono.Cecil.Rocks.dll" />
     </files>
 </package>
