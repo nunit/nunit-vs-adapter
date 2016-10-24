@@ -1,5 +1,3 @@
-#tool nuget:?package=NUnit.Runners&version=2.6.4
-
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
@@ -27,12 +25,31 @@ if (BuildSystem.IsRunningOnAppVeyor)
 	}
 	else
 	{
-		var buildNumber = AppVeyor.Environment.Build.Number;
-		packageVersion = version + "-CI-" + buildNumber + dbgSuffix;
-		if (AppVeyor.Environment.PullRequest.IsPullRequest)
-			packageVersion += "-PR-" + AppVeyor.Environment.PullRequest.Number;
+		var buildNumber = AppVeyor.Environment.Build.Number.ToString("00000");
+		var branch = AppVeyor.Environment.Repository.Branch;
+		var isPullRequest = AppVeyor.Environment.PullRequest.IsPullRequest;
+
+		if (branch == "master" && !isPullRequest)
+		{
+			packageVersion = version + "-dev-" + buildNumber + dbgSuffix;
+		}
 		else
-			packageVersion += "-" + AppVeyor.Environment.Repository.Branch;
+		{
+			var suffix = "-ci-" + buildNumber + dbgSuffix;
+
+			if (isPullRequest)
+				suffix += "-pr-" + AppVeyor.Environment.PullRequest.Number;
+			else
+				suffix += "-" + branch;
+
+			// Nuget limits "special version part" to 20 chars. Add one for the hyphen.
+			if (suffix.Length > 21)
+				suffix = suffix.Substring(0, 21);
+
+			suffix = suffix.Replace(".", "");
+
+			packageVersion = version + suffix;
+		}
 	}
 
 	AppVeyor.UpdateBuildVersion(packageVersion);
