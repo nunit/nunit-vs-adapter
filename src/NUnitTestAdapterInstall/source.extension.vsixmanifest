@@ -1,38 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
-  <Identifier Id="NUnitTestAdapterInstall..7c53286e-ac4f-485f-915c-5ec5a4c47b0c">
-    <Name>NUnit Test Adapter</Name>
-    <Author>Charlie Poole</Author>
-    <Version>2.1.0.7</Version>
-    <Description xml:space="preserve">NUnit adapter for integrated test execution under Visual Studio 2012 (all updates), Visual Studio 2013 (all updates), and the Visual Studio 2015 Preview and CTPs. Compatible with NUnit 2.0 through 2.6.4.</Description>
-    <Locale>1033</Locale>
-    <MoreInfoUrl>http://nunit.org/index.php?p=vsTestAdapter&amp;r=2.6.4</MoreInfoUrl>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="NUnitTestAdapterInstall..7c53286e-ac4f-485f-915c-5ec5a4c47b0c" Version="2.1.0.0" Language="en-US" Publisher="Terje Sandstrom" />
+    <DisplayName>NUnit 2 Test Adapter</DisplayName>
+    <Description xml:space="preserve">NUnit 2 adapter for running tests in Visual Studio 2012 and newer. Works with NUnit 2.x, use the NUnit 3 adapter for 3.x tests.</Description>
+    <MoreInfo>https://github.com/nunit/docs/wiki/VS-Adapter</MoreInfo>
     <License>license.rtf</License>
-    <!--<GettingStartedGuide>http://nunit.org</GettingStartedGuide>-->
     <Icon>nunit_32x32.png</Icon>
     <PreviewImage>preview.png</PreviewImage>
-    <SupportedProducts>
-      <VisualStudio Version="11.0">
-        <Edition>Ultimate</Edition>
-        <Edition>Premium</Edition>
-        <Edition>Pro</Edition>
-      </VisualStudio>
-      <VisualStudio Version="12.0">
-        <Edition>Ultimate</Edition>
-        <Edition>Premium</Edition>
-        <Edition>Pro</Edition>
-      </VisualStudio>
-      <VisualStudio Version="14.0">
-        <Edition>Ultimate</Edition>
-        <Edition>Premium</Edition>
-        <Edition>Pro</Edition>
-      </VisualStudio>
-    </SupportedProducts>
-    <SupportedFrameworkRuntimeEdition MinVersion="4.5" />
-    <AllUsers>false</AllUsers>
-  </Identifier>
-  <References />
-  <Content>
-    <CustomExtension Type="UnitTestExtension">NUnit.VisualStudio.TestAdapter.dll</CustomExtension>
-  </Content>
-</Vsix>
+    <Tags>test, Testing, adapter, NUNit, TDD, NUnit</Tags>
+  </Metadata>
+  <Installation>
+    <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[11.0,16.0)" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0,16.0)" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Enterprise" Version="[11.0,16.0)"/>
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+  </Dependencies>
+  <Assets>
+    <Asset Type="UnitTestExtension" d:Source="Project" d:ProjectName="NUnitTestAdapter" Path="|NUnitTestAdapter|" />
+  </Assets>
+  <Prerequisites>
+    <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0.25904.2,16.0)" DisplayName="Visual Studio core editor" />
+    <Prerequisite Id="Microsoft.VisualStudio.Component.ManagedDesktop.Prerequisites" Version="[15.0.25904.2,16.0)" DisplayName=".NET desktop development tools" />
+  </Prerequisites>
+</PackageManifest>
