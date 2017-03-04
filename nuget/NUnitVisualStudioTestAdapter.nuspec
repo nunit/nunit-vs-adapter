@@ -14,8 +14,8 @@
 Note that this package ONLY contains the adapter, not the NUnit framework.  You must also get the framework, or use the NUnitTestAdapter.WithFramework nuget package.
 You only need one such package for a solution. 
 The package works with Visual Studio >= 2012</description>
-        <releaseNotes>Updated to NUnit 2.6.4,  Support for VS 2015, Misc bug fixes</releaseNotes>
-        <copyright>NUnit Software</copyright>
+        <releaseNotes>Support for VS 2017, Misc bug fixes</releaseNotes>
+        <copyright>Charlie Poole</copyright>
         <language>en-US</language>
         <tags>test visualstudio testadapter</tags>
     </metadata>
