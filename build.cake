@@ -9,7 +9,7 @@ var configuration = Argument("configuration", "Debug");
 // SET PACKAGE VERSION
 //////////////////////////////////////////////////////////////////////
 
-var version = "2.1.0";
+var version = "2.1.1-b2";
 var modifier = "";
 
 var dbgSuffix = configuration == "Debug" ? "-dbg" : "";
@@ -68,6 +68,7 @@ var PACKAGE_IMAGE_DIR = PACKAGE_DIR + packageName + "/";
 var TOOLS_DIR = PROJECT_DIR + "tools/";
 var BIN_DIR = PROJECT_DIR + "bin/" + configuration + "/";
 var DEMO_BIN_DIR = PROJECT_DIR + "src/NUnitTestDemo/NUnitTestDemo/bin/" + configuration + "/";
+var VSIXDIR = PROJECT_DIR+"src/NUnitTestAdapterInstall/bin/"+configuration+"/";
 
 // Solutions
 var ADAPTER_SOLUTION = PROJECT_DIR + "NUnitTestAdapter.sln";
@@ -229,8 +230,9 @@ Task("PackageVsix")
 	.IsDependentOn("CreatePackageDir")
 	.Does(() =>
 	{
+        System.Console.WriteLine("Packaging the vsix");
 		CopyFile(
-			BIN_DIR + "NUnitTestAdapter.vsix", 
+			VSIXDIR + "NUnitTestAdapter.vsix", 
 			PACKAGE_DIR + packageName + ".vsix");
 	});
 
