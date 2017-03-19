@@ -3,12 +3,14 @@
   <Metadata>
     <Identity Id="NUnitTestAdapterInstall..7c53286e-ac4f-485f-915c-5ec5a4c47b0c" Version="2.1.1" Language="en-US" Publisher="Charlie Poole" />
     <DisplayName>NUnit 2 Test Adapter</DisplayName>
-    <Description xml:space="preserve">NUnit 2 adapter for running tests in Visual Studio 2012 and newer. Works with NUnit 2.x, use the NUnit 3 adapter for 3.x tests.</Description>
+    <Description xml:space="preserve">NUnit 2 adapter for running tests in Visual Studio 2012 and newer. Works with NUnit 2.x, for 3.x tests use the NUnit 3 adapter.</Description>
     <MoreInfo>https://github.com/nunit/docs/wiki/VS-Adapter</MoreInfo>
     <License>license.rtf</License>
+    <GettingStartedGuide>https://github.com/nunit/docs/wiki/Usage</GettingStartedGuide>
+    <ReleaseNotes>https://github.com/nunit/docs/wiki/AdapterV2-Release-Notes</ReleaseNotes>
     <Icon>nunit_32x32.png</Icon>
     <PreviewImage>preview.png</PreviewImage>
-    <Tags>test, Testing, adapter, NUNit, TDD, NUnit</Tags>
+    <Tags>test, Testing, adapter, NUnit, TDD, NUnit</Tags>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[11.0,16.0)" />
