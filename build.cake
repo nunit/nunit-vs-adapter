@@ -22,7 +22,7 @@ if (BuildSystem.IsRunningOnAppVeyor)
 	if (tag.IsTag)
 	{
 		packageVersion = tag.Name;
-	}
+    }
 	else
 	{
 		var buildNumber = AppVeyor.Environment.Build.Number.ToString("00000");
@@ -32,6 +32,8 @@ if (BuildSystem.IsRunningOnAppVeyor)
 		if (branch == "master" && !isPullRequest)
 		{
 			packageVersion = version + "-dev-" + buildNumber + dbgSuffix;
+            
+
 		}
 		else
 		{
@@ -51,7 +53,8 @@ if (BuildSystem.IsRunningOnAppVeyor)
 			packageVersion = version + suffix;
 		}
 	}
-
+    if (packageVersion.Length>20)
+       packageVersion=packageVersion.Substring(0,20);
 	AppVeyor.UpdateBuildVersion(packageVersion);
 }
 
