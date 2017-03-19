@@ -22,7 +22,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
         private static readonly string ThisAssemblyPath =
             Path.GetFullPath("NUnit.VisualStudio.TestAdapter.Tests.dll");
         private static readonly string ThisCodeFile =
-            Path.GetFullPath(@"..\..\src\NUnitTestAdapterTests\NUnitEventListenerTests.cs");
+            Path.GetFullPath(@"..\..\NUnitEventListenerTests.cs");
 
         private const int LineNumber = 29; // Must be number of the following line
 // ReSharper disable once UnusedMember.Local

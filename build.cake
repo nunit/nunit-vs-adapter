@@ -9,7 +9,7 @@ var configuration = Argument("configuration", "Debug");
 // SET PACKAGE VERSION
 //////////////////////////////////////////////////////////////////////
 
-var version = "2.1.0";
+var version = "2.1.1";
 var modifier = "";
 
 var dbgSuffix = configuration == "Debug" ? "-dbg" : "";
@@ -22,7 +22,7 @@ if (BuildSystem.IsRunningOnAppVeyor)
 	if (tag.IsTag)
 	{
 		packageVersion = tag.Name;
-	}
+    }
 	else
 	{
 		var buildNumber = AppVeyor.Environment.Build.Number.ToString("00000");
@@ -32,6 +32,8 @@ if (BuildSystem.IsRunningOnAppVeyor)
 		if (branch == "master" && !isPullRequest)
 		{
 			packageVersion = version + "-dev-" + buildNumber + dbgSuffix;
+            
+
 		}
 		else
 		{
@@ -51,7 +53,8 @@ if (BuildSystem.IsRunningOnAppVeyor)
 			packageVersion = version + suffix;
 		}
 	}
-
+    if (packageVersion.Length>20)
+       packageVersion=packageVersion.Substring(0,20);
 	AppVeyor.UpdateBuildVersion(packageVersion);
 }
 
@@ -68,6 +71,8 @@ var PACKAGE_IMAGE_DIR = PACKAGE_DIR + packageName + "/";
 var TOOLS_DIR = PROJECT_DIR + "tools/";
 var BIN_DIR = PROJECT_DIR + "bin/" + configuration + "/";
 var DEMO_BIN_DIR = PROJECT_DIR + "src/NUnitTestDemo/NUnitTestDemo/bin/" + configuration + "/";
+var VSIXDIR = PROJECT_DIR+"src/NUnitTestAdapterInstall/bin/"+configuration+"/";
+var TEST_BIN_DIR = PROJECT_DIR+"src/NUnitTestAdapterTests/bin/"+configuration+"/";
 
 // Solutions
 var ADAPTER_SOLUTION = PROJECT_DIR + "NUnitTestAdapter.sln";
@@ -77,7 +82,7 @@ var DEMO_SOLUTION = PROJECT_DIR + "src/NUnitTestDemo/NUnitTestDemo.sln";
 var NUNIT_CONSOLE = TOOLS_DIR + "NUnit.Runners/tools/nunit-console.exe";
 
 // Test Assemblies
-var ADAPTER_TESTS = BIN_DIR + "NUnit.VisualStudio.TestAdapter.Tests.dll";
+var ADAPTER_TESTS = TEST_BIN_DIR + "NUnit.VisualStudio.TestAdapter.Tests.dll";
 var DEMO_TESTS = DEMO_BIN_DIR + "NUnitTestDemo.dll";
 
 // Custom settings for VSTest
@@ -229,8 +234,9 @@ Task("PackageVsix")
 	.IsDependentOn("CreatePackageDir")
 	.Does(() =>
 	{
+        System.Console.WriteLine("Packaging the vsix");
 		CopyFile(
-			BIN_DIR + "NUnitTestAdapter.vsix", 
+			VSIXDIR + "NUnitTestAdapter.vsix", 
 			PACKAGE_DIR + packageName + ".vsix");
 	});
 

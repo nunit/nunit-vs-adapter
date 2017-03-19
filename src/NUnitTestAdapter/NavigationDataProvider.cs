@@ -73,10 +73,12 @@ namespace NUnit.VisualStudio.TestAdapter
             return navigationData ?? NavigationData.Invalid;
 #endif
         }
+        static bool DoesPdbFileExist(string filepath) => File.Exists(Path.ChangeExtension(filepath, ".pdb"));
 
         static IDictionary<string, TypeDefinition> CacheTypes(string assemblyPath)
         {
-            var readerParameters = new ReaderParameters() { ReadSymbols = true };
+             var readsymbols = DoesPdbFileExist(assemblyPath);
+            var readerParameters = new ReaderParameters() { ReadSymbols = readsymbols };
             var module = ModuleDefinition.ReadModule(assemblyPath, readerParameters);
 
             var types = new Dictionary<string, TypeDefinition>();
