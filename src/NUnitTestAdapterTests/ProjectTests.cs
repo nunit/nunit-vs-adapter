@@ -41,7 +41,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
         }
 
         [Test]
-        public void ThatAdapterReferencesThe263VersionOfFramework()
+        public void ThatAdapterReferencesThe264VersionOfFramework()
         {
             var dir = Directory.GetCurrentDirectory();
             var assembly = Assembly.LoadFrom(dir + "/NUnit.VisualStudio.TestAdapter.dll");

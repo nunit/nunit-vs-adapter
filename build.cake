@@ -69,6 +69,7 @@ var TOOLS_DIR = PROJECT_DIR + "tools/";
 var BIN_DIR = PROJECT_DIR + "bin/" + configuration + "/";
 var DEMO_BIN_DIR = PROJECT_DIR + "src/NUnitTestDemo/NUnitTestDemo/bin/" + configuration + "/";
 var VSIXDIR = PROJECT_DIR+"src/NUnitTestAdapterInstall/bin/"+configuration+"/";
+var TEST_BIN_DIR = PROJECT_DIR+"src/NUnitTestAdapterTests/bin/"+configuration+"/";
 
 // Solutions
 var ADAPTER_SOLUTION = PROJECT_DIR + "NUnitTestAdapter.sln";
@@ -78,7 +79,7 @@ var DEMO_SOLUTION = PROJECT_DIR + "src/NUnitTestDemo/NUnitTestDemo.sln";
 var NUNIT_CONSOLE = TOOLS_DIR + "NUnit.Runners/tools/nunit-console.exe";
 
 // Test Assemblies
-var ADAPTER_TESTS = BIN_DIR + "NUnit.VisualStudio.TestAdapter.Tests.dll";
+var ADAPTER_TESTS = TEST_BIN_DIR + "NUnit.VisualStudio.TestAdapter.Tests.dll";
 var DEMO_TESTS = DEMO_BIN_DIR + "NUnitTestDemo.dll";
 
 // Custom settings for VSTest
