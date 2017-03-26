@@ -80,7 +80,7 @@ namespace NUnit.VisualStudio.TestAdapter
             var path = Path.GetDirectoryName(assemblyPath);
             paths.Add(path);
             resolver.AddSearchDirectory(path);
-             var readsymbols = DoesPdbFileExist(assemblyPath);
+            var readsymbols = DoesPdbFileExist(assemblyPath);
             var readerParameters = new ReaderParameters { ReadSymbols = readsymbols,AssemblyResolver = resolver};
             var module = ModuleDefinition.ReadModule(assemblyPath, readerParameters);
 
