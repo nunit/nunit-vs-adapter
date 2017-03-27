@@ -43,8 +43,7 @@ namespace NUnit.VisualStudio.TestAdapter
             {
                 methodDef = typeDef
                     .GetMethods()
-                    .Where(o => o.Name == methodName)
-                    .FirstOrDefault();
+                    .FirstOrDefault(o => o.Name == methodName);
 
                 if (methodDef != null)
                     break;
@@ -52,8 +51,7 @@ namespace NUnit.VisualStudio.TestAdapter
                 var baseType = typeDef.BaseType;
                 if (baseType == null || baseType.FullName == "System.Object")
                     return NavigationData.Invalid;
-
-                typeDef = typeDef.BaseType.Resolve();
+               typeDef = typeDef.BaseType.Resolve();
             }
 
             var sequencePoint = FirstOrDefaultSequencePoint(methodDef);
@@ -77,14 +75,27 @@ namespace NUnit.VisualStudio.TestAdapter
 
         static IDictionary<string, TypeDefinition> CacheTypes(string assemblyPath)
         {
-             var readsymbols = DoesPdbFileExist(assemblyPath);
-            var readerParameters = new ReaderParameters() { ReadSymbols = readsymbols };
+            var paths = new List<string>();
+            var resolver = new DefaultAssemblyResolver();
+            var path = Path.GetDirectoryName(assemblyPath);
+            paths.Add(path);
+            resolver.AddSearchDirectory(path);
+            var readsymbols = DoesPdbFileExist(assemblyPath);
+            var readerParameters = new ReaderParameters { ReadSymbols = readsymbols,AssemblyResolver = resolver};
             var module = ModuleDefinition.ReadModule(assemblyPath, readerParameters);
 
             var types = new Dictionary<string, TypeDefinition>();
 
             foreach (var type in module.GetTypes())
+            {
+                var directory = Path.GetDirectoryName(type.Module.FullyQualifiedName);
+                if (!paths.Contains(directory))
+                {
+                    resolver.AddSearchDirectory(directory);
+                    paths.Add(directory);
+                }
                 types[type.FullName] = type;
+            }
 
             return types;
         }

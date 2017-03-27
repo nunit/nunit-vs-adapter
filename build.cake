@@ -9,7 +9,7 @@ var configuration = Argument("configuration", "Debug");
 // SET PACKAGE VERSION
 //////////////////////////////////////////////////////////////////////
 
-var version = "2.1.1";
+var version = "2.2.0";
 var modifier = "";
 
 var dbgSuffix = configuration == "Debug" ? "-dbg" : "";
