@@ -26,7 +26,7 @@ if (BuildSystem.IsRunningOnAppVeyor)
 	else
 	{
 		var buildNumber = AppVeyor.Environment.Build.Number.ToString("00000");
-		var branch = AppVeyor.Environment.Repository.Branch;
+		var branch = AppVeyor.Environment.Repository.Branch.Replace(".", "").Replace("/", "");
 		var isPullRequest = AppVeyor.Environment.PullRequest.IsPullRequest;
 
 		if (branch == "master" && !isPullRequest)
