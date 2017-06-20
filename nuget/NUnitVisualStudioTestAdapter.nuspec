@@ -15,7 +15,7 @@ Note that this package ONLY contains the adapter, not the NUnit framework.  You 
 You only need one such package for a solution. The package works with Visual Studio >= 2012</description>
       <summary>The NUnit TestAdapter for Visual Studio 2012/13/15/17 for NUnit 2</summary>
         <releaseNotes>Hotfix for .net framework 3.5 support, and missing pdb crash</releaseNotes>
-        <copyright>Copyright (c) Charlie Poole 2011-20017, Terje Sandstrom 2014-2017</copyright>
+        <copyright>Copyright (c) Charlie Poole 2011-2017, Terje Sandstrom 2014-2017</copyright>
         <language>en-US</language>
         <tags>test visualstudio testadapter</tags>
     </metadata>
