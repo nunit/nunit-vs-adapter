@@ -45,8 +45,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
         
         // NOTE: If the location of the FakeTestCase method in the 
         // file changes, update the value of FAKE_LINE_NUMBER.
-        private const int FakeLineNumber = 31;
-// ReSharper disable once UnusedMember.Local
+        private const int FakeLineNumber = 49;
         private void FakeTestCase() { } // FAKE_LINE_NUMBER SHOULD BE THIS LINE
 
         private ITest fakeNUnitTest;

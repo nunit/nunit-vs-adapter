@@ -43,8 +43,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
         private static readonly string ThisCodeFile =
             Path.GetFullPath(@"..\..\NUnitEventListenerTests.cs");
 
-        private const int LineNumber = 29; // Must be number of the following line
-// ReSharper disable once UnusedMember.Local
+        private const int LineNumber = 47; // Must be number of the FakeTestMethod line
         private void FakeTestMethod() { }
 
         private ITest fakeNUnitTest;
