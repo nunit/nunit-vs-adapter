@@ -1,5 +1,5 @@
 ﻿// ****************************************************************
-// Copyright (c) 2011 Charlie Poole. All rights reserved.
+// Copyright (c) 2011 Charlie Poole, Terje Sandstrom
 // ****************************************************************
 
 using System;
@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("NUnit Software")]
 [assembly: AssemblyProduct("NUnit.VisualStudio.TestAdapter")]
-[assembly: AssemblyCopyright("Copyright 2011-2017, NUnit Software")]
+[assembly: AssemblyCopyright("Copyright (c) 2011-2017 Charlie Poole, 2014-2017 Terje Sandstrom")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(false)]
