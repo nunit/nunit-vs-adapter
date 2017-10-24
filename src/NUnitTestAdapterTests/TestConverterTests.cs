@@ -68,7 +68,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
             var fixtureNode = new TestNode(nunitFixture);
             fakeNUnitTest = (ITest)fixtureNode.Tests[0];
 
-            testConverter = new TestConverter(new TestLogger(), ThisAssemblyPath);
+            testConverter = new TestConverter(new TestLogger(), ThisAssemblyPath, true);
         }
 
         [Test]

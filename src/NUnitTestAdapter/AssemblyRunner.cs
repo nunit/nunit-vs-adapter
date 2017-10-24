@@ -54,19 +54,19 @@ namespace NUnit.VisualStudio.TestAdapter
         #region Constructors
 
         // This constructor is called by the others and is used directly for testing
-        public AssemblyRunner(TestLogger logger, string assemblyName, INUnitTestAdapter nunitTestAdapter)
+        public AssemblyRunner(TestLogger logger, string assemblyName, INUnitTestAdapter nunitTestAdapter, bool collectSourceInformation)
         {
             this.logger = logger;
             this.assemblyName = assemblyName;
-            testConverter = new TestConverter(logger, assemblyName);
+            testConverter = new TestConverter(logger, assemblyName, collectSourceInformation);
             loadedTestCases = new List<TestCase>();
             nunitFilter = TestFilter.Empty;
             NUnitTestAdapter = nunitTestAdapter;
         }
 
         // This constructor is used when the executor is called with a list of test cases
-        public AssemblyRunner(TestLogger logger, string assemblyName, IEnumerable<TestCase> selectedTestCases, INUnitTestAdapter nunitTestAdapter)
-            : this(logger, assemblyName, nunitTestAdapter)
+        public AssemblyRunner(TestLogger logger, string assemblyName, IEnumerable<TestCase> selectedTestCases, INUnitTestAdapter nunitTestAdapter, bool collectSourceInformation)
+            : this(logger, assemblyName, nunitTestAdapter, collectSourceInformation)
         {
             nunitFilter = MakeTestFilter(selectedTestCases);
         }
@@ -74,8 +74,8 @@ namespace NUnit.VisualStudio.TestAdapter
         private readonly ITfsTestFilter tfsFilter;
 
         // This constructor is used when the executor is called with a list of assemblies
-        public AssemblyRunner(TestLogger logger, string assemblyName, ITfsTestFilter tfsFilter, INUnitTestAdapter nunitTestAdapter)
-            : this(logger, assemblyName, nunitTestAdapter)
+        public AssemblyRunner(TestLogger logger, string assemblyName, ITfsTestFilter tfsFilter, INUnitTestAdapter nunitTestAdapter, bool collectSourceInformation)
+            : this(logger, assemblyName, nunitTestAdapter, collectSourceInformation)
         {
             this.tfsFilter = tfsFilter;
         }

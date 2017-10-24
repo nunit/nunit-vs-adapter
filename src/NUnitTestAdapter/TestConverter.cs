@@ -40,15 +40,20 @@ namespace NUnit.VisualStudio.TestAdapter
         private readonly Dictionary<string, TestCase> _vsTestCaseMap;
         private readonly string _sourceAssembly;
         private NavigationDataProvider _navigationDataProvider;
+        private bool _collectSourceInformation;
 
         #region Constructor
 
-        public TestConverter(TestLogger logger, string sourceAssembly)
+        public TestConverter(TestLogger logger, string sourceAssembly, bool collectSourceInformation)
         {
             _logger = logger;
             _sourceAssembly = sourceAssembly;
             _vsTestCaseMap = new Dictionary<string, TestCase>();
-            _navigationDataProvider = new NavigationDataProvider(sourceAssembly);
+            _collectSourceInformation = collectSourceInformation;
+            if (_collectSourceInformation)
+            {
+                _navigationDataProvider = new NavigationDataProvider(sourceAssembly);
+            }
         }
 
         #endregion
@@ -140,11 +145,14 @@ namespace NUnit.VisualStudio.TestAdapter
                 LineNumber = 0
             };
 
-            var navData = _navigationDataProvider.GetNavigationData(nunitTest.ClassName, nunitTest.MethodName);
-            if (navData.IsValid)
+            if (_collectSourceInformation && _navigationDataProvider != null)
             {
-                testCase.CodeFilePath = navData.FilePath;
-                testCase.LineNumber = navData.LineNumber;
+                var navData = _navigationDataProvider.GetNavigationData(nunitTest.ClassName, nunitTest.MethodName);
+                if (navData.IsValid)
+                {
+                    testCase.CodeFilePath = navData.FilePath;
+                    testCase.LineNumber = navData.LineNumber;
+                }
             }
 
             testCase.AddTraitsFromNUnitTest(nunitTest);

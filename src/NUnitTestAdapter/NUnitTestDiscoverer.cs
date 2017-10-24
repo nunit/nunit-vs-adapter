@@ -50,6 +50,7 @@ namespace NUnit.VisualStudio.TestAdapter
         public void DiscoverTests(IEnumerable<string> sources, IDiscoveryContext discoveryContext, IMessageLogger messageLogger, ITestCaseDiscoverySink discoverySink)
         {
             TestLog.Initialize(messageLogger);
+            Initialize(discoveryContext);
             if (RegistryFailure)
             {
                 TestLog.SendErrorMessage(ErrorMsg);
@@ -70,7 +71,7 @@ namespace NUnit.VisualStudio.TestAdapter
                 {
                     if (runner.Load(package))
                     {
-                        testConverter = new TestConverter(TestLog, sourceAssembly);
+                        testConverter = new TestConverter(TestLog, sourceAssembly, CollectSourceInformation);
                         int cases = ProcessTestCases(runner.Test, discoverySink, testConverter);
                         TestLog.SendDebugMessage(string.Format("Discovered {0} test cases", cases));
                     }

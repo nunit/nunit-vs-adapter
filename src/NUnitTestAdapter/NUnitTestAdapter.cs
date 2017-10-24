@@ -24,6 +24,8 @@
 using System;
 using System.Reflection;
 using System.Runtime.Remoting.Channels;
+using System.Xml;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 using NUnit.Core;
 using NUnit.Util;
 
@@ -47,6 +49,7 @@ namespace NUnit.VisualStudio.TestAdapter
 
         protected bool UseVsKeepEngineRunning { get; private set; }
         public bool ShadowCopy { get; private set; }
+        public bool CollectSourceInformation { get; private set; }
 
         public int Verbosity { get; private set; }
 
@@ -91,6 +94,61 @@ namespace NUnit.VisualStudio.TestAdapter
         #endregion
 
         #region Protected Helper Methods
+
+        // The Adapter is constructed using the default constructor.
+        // We don't have any info to initialize it until one of the
+        // ITestDiscovery or ITestExecutor methods is called. Each
+        // Discover or Execute method must call this method.
+        protected void Initialize(IDiscoveryContext context)
+        {
+            var settingsXml = context?.RunSettings?.SettingsXml;
+            if (string.IsNullOrEmpty(settingsXml))
+                settingsXml = "<RunSettings />";
+            var doc = new XmlDocument();
+            doc.LoadXml(settingsXml);
+            var runConfiguration = doc.SelectSingleNode("RunSettings/RunConfiguration");
+            CollectSourceInformation = GetInnerTextAsBool(runConfiguration, "CollectSourceInformation", true);
+        }
+
+        #region Helper Methods
+
+        private string GetInnerText(XmlNode startNode, string xpath, params string[] validValues)
+        {
+            if (startNode != null)
+            {
+                var targetNode = startNode.SelectSingleNode(xpath);
+                if (targetNode != null)
+                {
+                    string val = targetNode.InnerText;
+
+                    if (validValues != null && validValues.Length > 0)
+                    {
+                        foreach (string valid in validValues)
+                            if (string.Compare(valid, val, StringComparison.OrdinalIgnoreCase) == 0)
+                                return valid;
+
+                        throw new ArgumentException(string.Format(
+                            "Invalid value {0} passed for element {1}.", val, xpath));
+                    }
+
+                    return val;
+                }
+            }
+
+            return null;
+        }
+
+        private bool GetInnerTextAsBool(XmlNode startNode, string xpath, bool defaultValue)
+        {
+            string temp = GetInnerText(startNode, xpath);
+
+            if (string.IsNullOrEmpty(temp))
+                return defaultValue;
+
+            return bool.Parse(temp);
+        }
+
+        #endregion
 
         private const string Name = "NUnit VS Adapter";
 
