@@ -35,7 +35,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests.Fakes
 
         public string SettingsXml
         {
-            get { throw new NotImplementedException(); }
+            get { return string.Empty; }
         }
     }
 }
