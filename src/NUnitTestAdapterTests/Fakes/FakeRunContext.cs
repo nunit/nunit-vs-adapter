@@ -71,7 +71,7 @@ namespace NUnit.VisualStudio.TestAdapter.Tests.Fakes
 
         IRunSettings IDiscoveryContext.RunSettings
         {
-            get { throw new NotImplementedException(); }
+            get { return new FakeRunSettings(); }
         }
 
         #endregion

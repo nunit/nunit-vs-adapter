@@ -57,6 +57,7 @@ namespace NUnit.VisualStudio.TestAdapter
         public void RunTests(IEnumerable<string> sources, IRunContext runContext, IFrameworkHandle frameworkHandle)
         {
             TestLog.Initialize(frameworkHandle);
+            Initialize(runContext);
             if (RegistryFailure)
             {
                 TestLog.SendErrorMessage(ErrorMsg);
@@ -83,7 +84,7 @@ namespace NUnit.VisualStudio.TestAdapter
                     if (!Path.IsPathRooted(sourceAssembly))
                         sourceAssembly = Path.Combine(Environment.CurrentDirectory, sourceAssembly);
 
-                    currentRunner = new AssemblyRunner(TestLog, sourceAssembly, tfsfilter, this);
+                    currentRunner = new AssemblyRunner(TestLog, sourceAssembly, tfsfilter, this, CollectSourceInformation);
                     currentRunner.RunAssembly(frameworkHandle);
                 }
             }
@@ -111,6 +112,7 @@ namespace NUnit.VisualStudio.TestAdapter
 #endif
 
             TestLog.Initialize(frameworkHandle);
+            Initialize(runContext);
             if (RegistryFailure)
             {
                 TestLog.SendErrorMessage(ErrorMsg);
@@ -126,7 +128,7 @@ namespace NUnit.VisualStudio.TestAdapter
             var assemblyGroups = tests.GroupBy(tc => tc.Source);
             foreach (var assemblyGroup in assemblyGroups)
             {
-                currentRunner = new AssemblyRunner(TestLog, assemblyGroup.Key, assemblyGroup, this);
+                currentRunner = new AssemblyRunner(TestLog, assemblyGroup.Key, assemblyGroup, this, CollectSourceInformation);
                 currentRunner.RunAssembly(frameworkHandle);
             }
 
