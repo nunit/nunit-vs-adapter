@@ -8,6 +8,7 @@
         <owners>Charlie Poole, Terje Sandstrom</owners>
         <licenseUrl>http://visualstudiogallery.msdn.microsoft.com/site/6ab922d0-21c0-4f06-ab5f-4ecd1fe7175d/eula?licenseType=None</licenseUrl>
         <projectUrl>http://nunit.org/index.php?p=vsTestAdapter&amp;r=2.6</projectUrl>
+        <repository type="git" url="https://github.com/nunit/nunit-vs-adapter"/>
         <iconUrl>http://nunit.org/nuget/nunit_32x32.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>The NUnit TestAdapter for Visual Studio 2012/13/15 for NUnit 2.  With this package you don't need to install the VSIX adapter package, and you don't need to upload the adapter to your TFS server.
