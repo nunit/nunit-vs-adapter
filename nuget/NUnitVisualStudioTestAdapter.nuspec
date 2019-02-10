@@ -7,7 +7,7 @@
         <authors>Charlie Poole, Terje Sandstrom</authors>
         <owners>Charlie Poole, Terje Sandstrom</owners>
         <licenseUrl>http://visualstudiogallery.msdn.microsoft.com/site/6ab922d0-21c0-4f06-ab5f-4ecd1fe7175d/eula?licenseType=None</licenseUrl>
-        <projectUrl>http://nunit.org/index.php?p=vsTestAdapter&amp;r=2.6</projectUrl>
+        <projectUrl>https://nunit.org/index.php?p=vsTestAdapter&amp;r=2.6</projectUrl>
         <repository type="git" url="https://github.com/nunit/nunit-vs-adapter"/>
         <iconUrl>http://nunit.org/nuget/nunit_32x32.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
