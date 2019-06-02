@@ -10,7 +10,7 @@ var configuration = Argument("configuration", "Debug");
 //////////////////////////////////////////////////////////////////////
 
 var version = "2.2.0";
-var modifier = "";
+var modifier = "-beta03";
 
 var dbgSuffix = configuration == "Debug" ? "-dbg" : "";
 var packageVersion = version + modifier + dbgSuffix;
@@ -70,6 +70,7 @@ var PACKAGE_DIR = PROJECT_DIR + "package/";
 var PACKAGE_IMAGE_DIR = PACKAGE_DIR + packageName + "/";
 var TOOLS_DIR = PROJECT_DIR + "tools/";
 var BIN_DIR = PROJECT_DIR + "bin/" + configuration + "/";
+var NUGET_DIR = PROJECT_DIR + "nuget/";
 var DEMO_BIN_DIR = PROJECT_DIR + "src/NUnitTestDemo/NUnitTestDemo/bin/" + configuration + "/";
 var VSIXDIR = PROJECT_DIR+"src/NUnitTestAdapterInstall/bin/"+configuration+"/";
 var TEST_BIN_DIR = PROJECT_DIR+"src/NUnitTestAdapterTests/bin/"+configuration+"/";
@@ -188,6 +189,7 @@ Task("CreateWorkingImage")
 	.IsDependentOn("CreatePackageDir")
 	.Does(() =>
 	{
+        Information("Creating work image");
 		CreateDirectory(PACKAGE_IMAGE_DIR);
 		CleanDirectory(PACKAGE_IMAGE_DIR);
 
@@ -202,8 +204,9 @@ Task("CreateWorkingImage")
 			BIN_DIR + "Mono.Cecil.Rocks.dll",
 			BIN_DIR + "nunit.core.dll",
 			BIN_DIR + "nunit.core.interfaces.dll",
-			BIN_DIR + "nunit.util.dll"
-		};
+			BIN_DIR + "nunit.util.dll",
+            NUGET_DIR + "nunittestadapter.props"
+        };
 
 		var binDir = PACKAGE_IMAGE_DIR + "bin/";
 		CreateDirectory(binDir);
@@ -221,6 +224,7 @@ Task("PackageNuGet")
 	.IsDependentOn("CreateWorkingImage")
 	.Does(() => 
 	{
+        System.Console.WriteLine("Packaging the nuget");
         NuGetPack("nuget/NUnitVisualStudioTestAdapter.nuspec", new NuGetPackSettings()
         {
             Version = packageVersion,
