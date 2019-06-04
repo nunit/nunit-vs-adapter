@@ -41,7 +41,6 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <Visible>False</Visible>
         </Content>
-        
-    </ItemGroup>
+     </ItemGroup>
 </Project>
 

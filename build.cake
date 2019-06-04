@@ -224,7 +224,7 @@ Task("PackageNuGet")
 	.IsDependentOn("CreateWorkingImage")
 	.Does(() => 
 	{
-        System.Console.WriteLine("Packaging the nuget");
+        Information("Creating the NuGet package");
         NuGetPack("nuget/NUnitVisualStudioTestAdapter.nuspec", new NuGetPackSettings()
         {
             Version = packageVersion,
@@ -238,7 +238,7 @@ Task("PackageVsix")
 	.IsDependentOn("CreatePackageDir")
 	.Does(() =>
 	{
-        System.Console.WriteLine("Packaging the vsix");
+        Information("Creating the vsix package");
 		CopyFile(
 			VSIXDIR + "NUnitTestAdapter.vsix", 
 			PACKAGE_DIR + packageName + ".vsix");
