@@ -38,14 +38,14 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
         }
 
         [Test]
-        public void ThatAdapterReferencesThe264VersionOfFramework()
+        public void ThatAdapterReferencesThe271VersionOfFramework()
         {
             var dir = Directory.GetCurrentDirectory();
             var assembly = Assembly.LoadFrom(dir + "/NUnit.VisualStudio.TestAdapter.dll");
             var refNames = assembly.GetReferencedAssemblies().Where(ass => ass.Name == "nunit.core").ToList();
             Assert.IsTrue(refNames != null && refNames.Count() == 1, "No reference to Microsoft.VisualStudio.TestPlatform.ObjectModel found");
             var nunitVersion = refNames[0].Version;
-            Assert.IsTrue(nunitVersion.Major == 2 && nunitVersion.Minor == 6 && nunitVersion.Build == 4, "nunit must be of version 2.6.4");
+            Assert.IsTrue(nunitVersion.Major == 2 && nunitVersion.Minor == 7 && nunitVersion.Build == 1, "nunit must be of version 2.7.1");
         }
 
         [Test]
@@ -64,6 +64,6 @@ namespace NUnit.VisualStudio.TestAdapter.Tests
             }
         }
 
-       
+
     }
 }
