@@ -15,7 +15,7 @@
 Note that this package ONLY contains the adapter, not the NUnit framework.</description>
       <summary>The NUnit TestAdapter for Visual Studio 2012 and newer for NUnit 2</summary>
         <releaseNotes>See release notes on project site</releaseNotes>
-        <copyright>Copyright (c) Charlie Poole 2011-2019, Terje Sandstrom 2014-2019</copyright>
+        <copyright>Copyright (c) Charlie Poole 2011-2020, Terje Sandstrom 2014-2020</copyright>
         <language>en-US</language>
         <tags>test visualstudio testadapter nunit</tags>
     </metadata>
